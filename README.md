@@ -5,3 +5,5 @@
   * 样式写在组件上，避免潜在的样式冲突
 
 [使用CSSTransition实现动画效果]
+
+[使用Redux，React-Redux实现数据的管理]

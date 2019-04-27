@@ -76,13 +76,13 @@ export const NavSearch = styled.input.attrs({
     width: 240px
   }
   &.slide-enter {
-    transition: all .2s ease-out;
+    transition: all .8s ease-out;
   }
   &.slide-enter-active {
     width: 240px;
   }
   &.slide-exit {
-    transition: all .2s ease-out;
+    transition: all .8s ease-out;
   }
   &.slide-exit-active {
       width: 160px;
@@ -98,8 +98,8 @@ export const Addition = styled.div`
 `
 export const Button = styled.div`
   width: 8vw;
-  height: 12vh;
-  line-height: 30px;
+  height: 9vh;
+  line-height: 34px;
   text-align: center;
   border-radius: 19px;
   border: 1px solid #ec6149;

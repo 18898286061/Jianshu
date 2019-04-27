@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux'
 import { CSSTransition } from 'react-transition-group';
 
 import { 
@@ -13,60 +14,61 @@ import {
   Button,
 } from './style'
 
-require('./style.css')
+require('./style.css') // 引入iconFont
 
-class Header extends React.Component{
-  constructor(props){
-    super(props)
-    this.state = {
-      focus: false
-    }
-    this.handleFocus = this.handleFocus.bind(this)
-    this.handleBlur = this.handleBlur.bind(this)
-  }
+const Header = (props)=> {
+  return (
+    <HeaderWrapper>
+      <Logo href="/" />
+      <NavLeft>
+        <SearchWrapper>
+          <CSSTransition
+            in={props.focus}
+            timeout={800}
+            classNames="slide"
+          >
+            <NavSearch className = { props.focus ? "active" : "" }
+            onFocus = {props.handleSearchFocus}
+            onBlur = {props.handleSearchBlur}
+            />
+          </CSSTransition>
+          <svg className = { props.focus ? "icon active" : "icon" } aria-hidden="true"><use xlinkHref="#icon-fangdajing" /></svg>
+        </SearchWrapper>
+      </NavLeft>
+      <NavRight>
+        <svg className = "icon" aria-hidden="true"><use xlinkHref="#icon-Aa" /></svg>
+        <NavItem className="right">登录</NavItem>
+      </NavRight>
+      <Addition>
+      <Button className="regi">注册</Button>
+        <Button className="writting"><svg className="icon" aria-hidden="true"><use xlinkHref="#icon-iconset0137" /></svg>写文章</Button>
+      </Addition>
+    </HeaderWrapper>
+  )
+}
 
-  handleFocus() {
-    this.setState({
-      focus: true
-    })
-  }
-
-  handleBlur() {
-    this.setState({
-      focus: false
-    })
-  }
-
-  render(){
-    return (
-      <HeaderWrapper>
-        <Logo href="/" />
-        <NavLeft>
-          <SearchWrapper>
-            <CSSTransition
-              in={this.state.focus}
-              timeout={200}
-              classNames="slide"
-            >
-              <NavSearch className = { this.state.focus ? "active" : "" }
-              onFocus = {this.handleFocus}
-              onBlur = {this.handleBlur}
-              />
-            </CSSTransition>
-            <svg className = { this.state.focus ? "icon active" : "icon" } aria-hidden="true"><use xlinkHref="#icon-fangdajing" /></svg>
-          </SearchWrapper>
-        </NavLeft>
-        <NavRight>
-          <svg className = "icon" aria-hidden="true"><use xlinkHref="#icon-Aa" /></svg>
-          <NavItem className="right">登录</NavItem>
-        </NavRight>
-        <Addition>
-        <Button className="regi">注册</Button>
-          <Button className="writting"><svg className="icon" aria-hidden="true"><use xlinkHref="#icon-iconset0137" /></svg>写文章</Button>
-        </Addition>
-      </HeaderWrapper>
-    )
+const mapStateToProps = (state)=> {
+  return {
+    focus: state.focus
   }
 }
 
-export default Header;
+const mapDispathToProps = (dispatch)=> {
+  return {
+    handleSearchFocus() {
+      const action = {
+        type: 'searchFocus'
+      }
+      dispatch(action)
+    },
+    handleSearchBlur() {
+      const action = {
+        type: 'searchBlur'
+      }
+      dispatch(action)
+    }
+  }
+}
+
+
+export default connect(mapStateToProps, mapDispathToProps)(Header);
