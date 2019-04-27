@@ -1,4 +1,5 @@
 import React from 'react';
+import { CSSTransition } from 'react-transition-group';
 
 import { 
   HeaderWrapper,
@@ -15,18 +16,48 @@ import {
 require('./style.css')
 
 class Header extends React.Component{
+  constructor(props){
+    super(props)
+    this.state = {
+      focus: false
+    }
+    this.handleFocus = this.handleFocus.bind(this)
+    this.handleBlur = this.handleBlur.bind(this)
+  }
+
+  handleFocus() {
+    this.setState({
+      focus: true
+    })
+  }
+
+  handleBlur() {
+    this.setState({
+      focus: false
+    })
+  }
+
   render(){
     return (
       <HeaderWrapper>
         <Logo href="/" />
         <NavLeft>
           <SearchWrapper>
-            <NavSearch className="active"/>
-            <svg className="icon" aria-hidden="true"><use xlinkHref="#icon-fangdajing" /></svg>
+            <CSSTransition
+              in={this.state.focus}
+              timeout={200}
+              classNames="slide"
+            >
+              <NavSearch className = { this.state.focus ? "active" : "" }
+              onFocus = {this.handleFocus}
+              onBlur = {this.handleBlur}
+              />
+            </CSSTransition>
+            <svg className = { this.state.focus ? "icon active" : "icon" } aria-hidden="true"><use xlinkHref="#icon-fangdajing" /></svg>
           </SearchWrapper>
         </NavLeft>
         <NavRight>
-          <svg className="icon" aria-hidden="true"><use xlinkHref="#icon-Aa" /></svg>
+          <svg className = "icon" aria-hidden="true"><use xlinkHref="#icon-Aa" /></svg>
           <NavItem className="right">登录</NavItem>
         </NavRight>
         <Addition>
