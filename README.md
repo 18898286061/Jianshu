@@ -1,1 +1,5 @@
-[使用StyleComponent进行样式的书写]
+# React 写简书
+
+## 使用StyleComponent进行样式的书写
+* 将样式写成组件的形式
+* 样式写在组件上，避免潜在的样式冲突
