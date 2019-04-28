@@ -9,7 +9,7 @@ export const HeaderWrapper = styled.div`
 
 export const Logo = styled.a`
   display: block;
-  width: 8vw;
+  width: 20vw;
   height:100%;
   background: url(${logoPic}) no-repeat;
   background-size: contain;
@@ -98,7 +98,6 @@ export const Addition = styled.div`
 `
 export const Button = styled.div`
   width: 8vw;
-  height: 9vh;
   line-height: 34px;
   text-align: center;
   border-radius: 19px;
