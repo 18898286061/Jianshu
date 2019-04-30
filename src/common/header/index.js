@@ -50,7 +50,8 @@ const Header = (props)=> {
 
 const mapStateToProps = (state)=> {
   return {
-    focus: state.header.get('focus')
+    // focus: state.get('header').get('focus')
+    focus: state.getIn(['header', 'focus'])
   }
 }
 
