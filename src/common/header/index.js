@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
+import { actionCreators } from './store'
 import { CSSTransition } from 'react-transition-group';
 
 import { 
@@ -49,23 +50,17 @@ const Header = (props)=> {
 
 const mapStateToProps = (state)=> {
   return {
-    focus: state.header.focus
+    focus: state.header.get('focus')
   }
 }
 
 const mapDispathToProps = (dispatch)=> {
   return {
     handleSearchFocus() {
-      const action = {
-        type: 'searchFocus'
-      }
-      dispatch(action)
+      dispatch(actionCreators.SearchFocus())
     },
     handleSearchBlur() {
-      const action = {
-        type: 'searchBlur'
-      }
-      dispatch(action)
+      dispatch(actionCreators.SearchBlur())
     }
   }
 }
