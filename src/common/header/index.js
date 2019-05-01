@@ -19,6 +19,33 @@ import {
 
 require('./style.css') // 引入iconFont
 
+const getSearchListArea = (show)=> {
+  if(show) {
+    return (
+      <SearchList>
+        <div className="searchTitle">
+        <span>热门搜索</span>
+        <span>换一批</span>
+        </div>
+        <div className="item clearfix">
+        <ListItem>我啊你</ListItem>
+        <ListItem>发顺丰</ListItem>
+        <ListItem>嘻嘻哈哈</ListItem>
+        <ListItem>我啊你</ListItem>
+        <ListItem>发顺丰</ListItem>
+        <ListItem>特未啊</ListItem>
+        <ListItem>我啊你</ListItem>
+        <ListItem>发顺丰</ListItem>
+        <ListItem>特未啊</ListItem>
+        </div>
+      </SearchList>
+    )
+  } else {
+    return null
+  }
+  
+}
+
 const Header = (props)=> {
   return (
     <HeaderWrapper>
@@ -36,23 +63,7 @@ const Header = (props)=> {
             />
           </CSSTransition>
           <svg className = { props.focus ? "icon active" : "icon" } aria-hidden="true"><use xlinkHref="#icon-fangdajing" /></svg>
-          <SearchList>
-            <div className="searchTitle">
-            <span>热门搜索</span>
-            <span>换一批</span>
-            </div>
-            <div className="item clearfix">
-            <ListItem>我啊你</ListItem>
-            <ListItem>发顺丰</ListItem>
-            <ListItem>特未啊</ListItem>
-            <ListItem>我啊你</ListItem>
-            <ListItem>发顺丰</ListItem>
-            <ListItem>特未啊</ListItem>
-            <ListItem>我啊你</ListItem>
-            <ListItem>发顺丰</ListItem>
-            <ListItem>特未啊</ListItem>
-            </div>
-          </SearchList>
+          { getSearchListArea(props.focus) }
         </SearchWrapper>
       </NavLeft>
       <NavRight>
