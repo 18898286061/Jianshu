@@ -19,69 +19,68 @@ import {
 
 require('./style.css') // 引入iconFont
 
-const getSearchListArea = (show)=> {
-  if(show) {
-    return (
-      <SearchList>
-        <div className="searchTitle">
-        <span>热门搜索</span>
-        <span>换一批</span>
-        </div>
-        <div className="item clearfix">
-        <ListItem>我啊你</ListItem>
-        <ListItem>发顺丰</ListItem>
-        <ListItem>嘻嘻哈哈</ListItem>
-        <ListItem>我啊你</ListItem>
-        <ListItem>发顺丰</ListItem>
-        <ListItem>特未啊</ListItem>
-        <ListItem>我啊你</ListItem>
-        <ListItem>发顺丰</ListItem>
-        <ListItem>特未啊</ListItem>
-        </div>
-      </SearchList>
-    )
-  } else {
-    return null
+class Header extends React.Component {
+
+  getSearchListArea() {
+    if (this.props.focus) {
+      return (
+        <SearchList>
+          <div className="searchTitle">
+            <span>热门搜索</span>
+            <span>换一批</span>
+          </div>
+          <div className="item clearfix">
+            {
+              this.props.list.map((item)=> {
+                return <ListItem key={ item }>{ item }</ListItem>
+              })
+            }
+          </div>
+        </SearchList>
+      )
+    } else {
+      return null
+    }
   }
   
-}
-
-const Header = (props)=> {
-  return (
-    <HeaderWrapper>
-      <Logo href="/" />
-      <NavLeft>
-        <SearchWrapper>
-          <CSSTransition
-            in={props.focus}
-            timeout={300}
-            classNames="slide"
-          >
-            <NavSearch className = { props.focus ? "active" : "" }
-            onFocus = {props.handleSearchFocus}
-            onBlur = {props.handleSearchBlur}
-            />
-          </CSSTransition>
-          <svg className = { props.focus ? "icon active" : "icon" } aria-hidden="true"><use xlinkHref="#icon-fangdajing" /></svg>
-          { getSearchListArea(props.focus) }
-        </SearchWrapper>
-      </NavLeft>
-      <NavRight>
-        <svg className = "icon" aria-hidden="true"><use xlinkHref="#icon-Aa" /></svg>
-        <NavItem className="right">登录</NavItem>
-      </NavRight>
-      <Addition>
-      <Button className="regi">注册</Button>
-        <Button className="writting"><svg className="icon" aria-hidden="true"><use xlinkHref="#icon-iconset0137" /></svg>写文章</Button>
-      </Addition>
-    </HeaderWrapper>
-  )
+  render() {
+    return (
+      <HeaderWrapper>
+        <Logo href="/" />
+        <NavLeft>
+          <SearchWrapper>
+            <CSSTransition
+              in={this.props.focus}
+              timeout={300}
+              classNames="slide"
+            >
+              <NavSearch className={this.props.focus ? "active" : ""}
+                onFocus={this.props.handleSearchFocus}
+                onBlur={this.props.handleSearchBlur}
+              />
+            </CSSTransition>
+            <svg className={this.props.focus ? "icon active" : "icon"} aria-hidden="true"><use xlinkHref="#icon-fangdajing" /></svg>
+            {this.getSearchListArea()}
+          </SearchWrapper>
+        </NavLeft>
+        <NavRight>
+          <svg className="icon" aria-hidden="true"><use xlinkHref="#icon-Aa" /></svg>
+          <NavItem className="right">登录</NavItem>
+        </NavRight>
+        <Addition>
+          <Button className="regi">注册</Button>
+          <Button className="writting"><svg className="icon" aria-hidden="true"><use xlinkHref="#icon-iconset0137" /></svg>写文章</Button>
+        </Addition>
+      </HeaderWrapper>
+    )
+  }
 }
 
 const mapStateToProps = (state)=> {
   return {
     // focus: state.get('header').get('focus')
-    focus: state.getIn(['header', 'focus'])
+    focus: state.getIn(['header', 'focus']),
+    list: state.getIn(['header', 'list'])
   }
 }
 
@@ -89,6 +88,7 @@ const mapDispathToProps = (dispatch)=> {
   return {
     handleSearchFocus() {
       dispatch(actionCreators.SearchFocus())
+      dispatch(actionCreators.getListArea())
     },
     handleSearchBlur() {
       dispatch(actionCreators.SearchBlur())
