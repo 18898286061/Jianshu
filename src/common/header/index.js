@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { actionCreators } from './store'
 import { CSSTransition } from 'react-transition-group';
 
-import { 
+import {
   HeaderWrapper,
   Logo,
   NavLeft,
@@ -11,6 +11,8 @@ import {
   NavItem,
   NavSearch,
   SearchWrapper,
+  SearchList,
+  ListItem,
   Addition,
   Button,
 } from './style'
@@ -25,7 +27,7 @@ const Header = (props)=> {
         <SearchWrapper>
           <CSSTransition
             in={props.focus}
-            timeout={800}
+            timeout={300}
             classNames="slide"
           >
             <NavSearch className = { props.focus ? "active" : "" }
@@ -34,6 +36,23 @@ const Header = (props)=> {
             />
           </CSSTransition>
           <svg className = { props.focus ? "icon active" : "icon" } aria-hidden="true"><use xlinkHref="#icon-fangdajing" /></svg>
+          <SearchList>
+            <div className="searchTitle">
+            <span>热门搜索</span>
+            <span>换一批</span>
+            </div>
+            <div className="item clearfix">
+            <ListItem>我啊你</ListItem>
+            <ListItem>发顺丰</ListItem>
+            <ListItem>特未啊</ListItem>
+            <ListItem>我啊你</ListItem>
+            <ListItem>发顺丰</ListItem>
+            <ListItem>特未啊</ListItem>
+            <ListItem>我啊你</ListItem>
+            <ListItem>发顺丰</ListItem>
+            <ListItem>特未啊</ListItem>
+            </div>
+          </SearchList>
         </SearchWrapper>
       </NavLeft>
       <NavRight>

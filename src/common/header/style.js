@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import logoPic from '../../statics/logo.png'
 
+
+
 export const HeaderWrapper = styled.div`
   display: flex;
   height: 56px;
@@ -55,6 +57,45 @@ export const SearchWrapper = styled.div`
   }
 `
 
+export const SearchList = styled.div`
+  width: 250px;
+  background: #fff;
+  position: absolute;
+  box-shadow: 0 0 8px rgba(0,0,0,.2);
+  border-radius: 4px;
+  top: 48px;
+  >.searchTitle {
+    padding: 12px 16px;
+    >span {
+      color: #969696;
+      font-size: 14px;
+    }
+    >span:last-child {
+      float: right;
+    }
+  }
+  >.item {
+    padding: 8px;
+  }
+  >.clearfix:after {
+    content: ""; 
+    display: block; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden;  
+  }
+`
+
+export const ListItem = styled.div`
+  float: left;
+  padding: 4px;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  font-size: 12px;
+  color: #787878;
+  margin: 6px 6px;
+`
+
 export const NavSearch = styled.input.attrs({
   placeholder: '搜索'
 })`
@@ -76,13 +117,13 @@ export const NavSearch = styled.input.attrs({
     width: 240px
   }
   &.slide-enter {
-    transition: all .8s ease-out;
+    transition: all .3s ease-out;
   }
   &.slide-enter-active {
     width: 240px;
   }
   &.slide-exit {
-    transition: all .8s ease-out;
+    transition: all .3s ease-out;
   }
   &.slide-exit-active {
       width: 160px;
