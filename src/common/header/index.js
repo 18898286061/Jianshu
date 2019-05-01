@@ -20,9 +20,9 @@ import {
 require('./style.css') // 引入iconFont
 
 class Header extends React.Component {
-
   getSearchListArea() {
-    if (this.props.focus) {
+    const { focus, list } = this.props
+    if (focus) {
       return (
         <SearchList>
           <div className="searchTitle">
@@ -31,7 +31,7 @@ class Header extends React.Component {
           </div>
           <div className="item clearfix">
             {
-              this.props.list.map((item)=> {
+              list.map((item)=> {
                 return <ListItem key={ item }>{ item }</ListItem>
               })
             }
@@ -44,22 +44,23 @@ class Header extends React.Component {
   }
   
   render() {
+    const { focus, handleSearchFocus, handleSearchBlur } = this.props
     return (
       <HeaderWrapper>
         <Logo href="/" />
         <NavLeft>
           <SearchWrapper>
             <CSSTransition
-              in={this.props.focus}
+              in={focus}
               timeout={300}
               classNames="slide"
             >
-              <NavSearch className={this.props.focus ? "active" : ""}
-                onFocus={this.props.handleSearchFocus}
-                onBlur={this.props.handleSearchBlur}
+              <NavSearch className={focus ? "active" : ""}
+                onFocus={handleSearchFocus}
+                onBlur={handleSearchBlur}
               />
             </CSSTransition>
-            <svg className={this.props.focus ? "icon active" : "icon"} aria-hidden="true"><use xlinkHref="#icon-fangdajing" /></svg>
+            <svg className={focus ? "icon active" : "icon"} aria-hidden="true"><use xlinkHref="#icon-fangdajing" /></svg>
             {this.getSearchListArea()}
           </SearchWrapper>
         </NavLeft>

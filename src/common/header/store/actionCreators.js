@@ -10,11 +10,6 @@ export const SearchBlur = ()=> ({
   type: actionTypes.SEARCH_BLUR
 })
 
-const get_listInfo = (data)=> ({
-  type: actionTypes.GET_LISTINFO,
-  data: fromJS(data)
-})
-
 export const getListArea = ()=> {
   return (dispatch) => {
     axios.get('/api/headerList.json').then((res)=> {
@@ -24,3 +19,8 @@ export const getListArea = ()=> {
     })
   }
 }
+
+const get_listInfo = (data)=> ({
+  type: actionTypes.GET_LISTINFO,
+  data: fromJS(data)
+})
