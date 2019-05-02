@@ -21,20 +21,30 @@ require('./style.css') // 引入iconFont
 
 class Header extends React.Component {
   getSearchListArea() {
-    const { focus, list } = this.props
-    if (focus) {
+    const { focus, mouseIn, list, page, totalPage, handleMouseEnter, handleMouseLeave, handleChangePage } = this.props
+    const jsList = list.toJS()
+    const pageList = []
+    
+    for(let i = (page - 1)*10; i < page * 10; i++) {
+      if(jsList[i]){ // 此 if 语句用于解决渲染出空标签的问题
+        pageList.push(
+          <ListItem key={ jsList[i] }>{ jsList[i] }</ListItem>
+        )
+      }
+    }
+
+    if (focus || mouseIn) {
       return (
-        <SearchList>
+        <SearchList
+          onMouseEnter = { handleMouseEnter }
+          onMouseLeave = { handleMouseLeave }
+        >
           <div className="searchTitle">
             <span>热门搜索</span>
-            <span>换一批</span>
+            <span onClick={ ()=> handleChangePage(page, totalPage) }>换一批</span>
           </div>
           <div className="item clearfix">
-            {
-              list.map((item)=> {
-                return <ListItem key={ item }>{ item }</ListItem>
-              })
-            }
+            { pageList }
           </div>
         </SearchList>
       )
@@ -44,7 +54,10 @@ class Header extends React.Component {
   }
   
   render() {
-    const { focus, handleSearchFocus, handleSearchBlur } = this.props
+    const { 
+      focus,
+      handleSearchFocus,
+      handleSearchBlur } = this.props
     return (
       <HeaderWrapper>
         <Logo href="/" />
@@ -81,7 +94,10 @@ const mapStateToProps = (state)=> {
   return {
     // focus: state.get('header').get('focus')
     focus: state.getIn(['header', 'focus']),
-    list: state.getIn(['header', 'list'])
+    mouseIn: state.getIn(['header', 'mouseIn']),
+    list: state.getIn(['header', 'list']),
+    page: state.getIn(['header', 'page']),
+    totalPage: state.getIn(['header', 'totalPage'])
   }
 }
 
@@ -93,6 +109,19 @@ const mapDispathToProps = (dispatch)=> {
     },
     handleSearchBlur() {
       dispatch(actionCreators.SearchBlur())
+    },
+    handleMouseEnter() {
+      dispatch(actionCreators.MouseEnter())
+    },
+    handleMouseLeave() {
+      dispatch(actionCreators.MouseLeave())
+    },
+    handleChangePage(page, totalPage) {
+      if (page < totalPage) {
+        dispatch(actionCreators.ChangePage(page + 1))
+      } else {
+        dispatch(actionCreators.ChangePage(1))
+      }
     }
   }
 }

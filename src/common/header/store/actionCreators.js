@@ -10,6 +10,19 @@ export const SearchBlur = ()=> ({
   type: actionTypes.SEARCH_BLUR
 })
 
+export const MouseEnter = ()=> ({
+  type: actionTypes.MOUSE_ENTER
+})
+
+export const MouseLeave = ()=> ({
+  type: actionTypes.MOUSE_LEAVE
+})
+
+export const ChangePage = (page)=> ({
+  type: actionTypes.CHANGE_PAGE,
+  page: page
+})
+
 export const getListArea = ()=> {
   return (dispatch) => {
     axios.get('/api/headerList.json').then((res)=> {
@@ -22,5 +35,6 @@ export const getListArea = ()=> {
 
 const get_listInfo = (data)=> ({
   type: actionTypes.GET_LISTINFO,
-  data: fromJS(data)
+  data: fromJS(data),
+  totalPage: Math.ceil(data.length / 10)
 })
