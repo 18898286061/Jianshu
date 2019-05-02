@@ -24,7 +24,7 @@ class Header extends React.Component {
     const { focus, mouseIn, list, page, totalPage, handleMouseEnter, handleMouseLeave, handleChangePage } = this.props
     const jsList = list.toJS()
     const pageList = []
-    
+
     for(let i = (page - 1)*10; i < page * 10; i++) {
       if(jsList[i]){ // 此 if 语句用于解决渲染出空标签的问题
         pageList.push(
@@ -41,7 +41,14 @@ class Header extends React.Component {
         >
           <div className="searchTitle">
             <span>热门搜索</span>
-            <span onClick={ ()=> handleChangePage(page, totalPage) }>换一批</span>
+            <span 
+              onClick={ ()=> handleChangePage(page, totalPage, this.spinIcon) }
+
+            >
+              <svg className="icon spin" aria-hidden="true" ref={(icon)=> {this.spinIcon = icon}}>
+                <use xlinkHref="#icon-spin" /></svg>
+                换一批
+            </span>
           </div>
           <div className="item clearfix">
             { pageList }
@@ -116,7 +123,15 @@ const mapDispathToProps = (dispatch)=> {
     handleMouseLeave() {
       dispatch(actionCreators.MouseLeave())
     },
-    handleChangePage(page, totalPage) {
+    handleChangePage(page, totalPage, spin) {
+      let originAngle = spin.style.transform.replace(/[^0-9]/ig, '')
+      if (originAngle) {
+        originAngle = parseInt(originAngle, 10)
+      } else {
+        originAngle = 0
+      }
+      spin.style.transform = `rotate(${originAngle + 360}deg)`
+
       if (page < totalPage) {
         dispatch(actionCreators.ChangePage(page + 1))
       } else {

@@ -69,6 +69,15 @@ export const SearchList = styled.div`
     >span {
       color: #969696;
       font-size: 14px;
+      >.spin {
+        font-size: 12px;
+        position: absolute;
+        right: 50px;
+        top: 3px;
+        transition: all .2s ease-in;
+        transform: rotate(0deg);
+        transform-origin: center center;
+      }
     }
     >span:last-child {
       float: right;
