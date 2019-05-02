@@ -63,6 +63,7 @@ class Header extends React.Component {
   render() {
     const { 
       focus,
+      list,
       handleSearchFocus,
       handleSearchBlur } = this.props
     return (
@@ -76,7 +77,7 @@ class Header extends React.Component {
               classNames="slide"
             >
               <NavSearch className={focus ? "active" : ""}
-                onFocus={handleSearchFocus}
+                onFocus={()=> handleSearchFocus(list)}
                 onBlur={handleSearchBlur}
               />
             </CSSTransition>
@@ -110,9 +111,9 @@ const mapStateToProps = (state)=> {
 
 const mapDispathToProps = (dispatch)=> {
   return {
-    handleSearchFocus() {
+    handleSearchFocus(list) {
+      list.size === 0 && dispatch(actionCreators.getListArea())
       dispatch(actionCreators.SearchFocus())
-      dispatch(actionCreators.getListArea())
     },
     handleSearchBlur() {
       dispatch(actionCreators.SearchBlur())

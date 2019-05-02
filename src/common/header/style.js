@@ -81,6 +81,7 @@ export const SearchList = styled.div`
     }
     >span:last-child {
       float: right;
+      cursor: pointer;
     }
   }
   >.item {
