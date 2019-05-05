@@ -66,6 +66,34 @@ export const TopicItem = styled.div`
   }
 ` 
 
+export const ListWrapper = styled.div`
+  
+`
+
+export const ListItem = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-item: center;
+  padding: 30px 0px;
+  border-bottom: 1px solid #f0f0f0;
+  >.itemImg {
+    width: 150px;
+    height: 100%;
+    border-radius: 4px;
+    border: 1px solid #f0f0f0;
+  }
+  >div>h2 {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.5;
+  }
+  >div>p {
+    font-size: 13px;
+    line-height: 24px;
+    color: #999;
+  }
+`
+
 export const HomeRight = styled.div`
   float: right;
   width: 280px;
@@ -73,5 +101,16 @@ export const HomeRight = styled.div`
     height: 270px;
     width: 625px
     border-radius: 6px;
+  }
+`
+
+export const RecommendWrapper = styled.div`
+  
+`
+
+export const RecommendList = styled.div`
+  >img{
+    width: 100%;
+    margin-bottom :6px;
   }
 `

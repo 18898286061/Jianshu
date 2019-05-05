@@ -1,0 +1,1 @@
+export const GET_TOPIC_DATA = 'home/GET_TOPIC_DATA'
