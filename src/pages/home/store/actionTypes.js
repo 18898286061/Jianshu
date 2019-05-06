@@ -1,1 +1,1 @@
-export const GET_TOPIC_DATA = 'home/GET_TOPIC_DATA'
+export const GET_HOME_DATA = 'home/GET_HOME_DATA'
