@@ -94,6 +94,20 @@ export const ListItem = styled.div`
   }
 `
 
+export const LoadMore = styled.div`
+  border-radius: 20px;
+  background-color: #a5a5a5;
+  margin: 30px auto 60px;
+  padding: 10px 15px;
+  text-align: center;
+  font-size: 15px;
+  color: #fff;
+  cursor: pointer;
+  :hover {
+    background-color: #9b9b9b;
+  }
+`
+
 export const HomeRight = styled.div`
   float: right;
   width: 280px;
