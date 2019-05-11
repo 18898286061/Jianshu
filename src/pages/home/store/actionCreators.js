@@ -35,3 +35,8 @@ export const getMoreList = (homePage)=> {
     })
   }
 }
+
+export const toggleTopShow = (show)=> ({
+  type: actionTypes.TOGGLE_TOP_SHOW,
+  show
+})

@@ -6,7 +6,7 @@ import {
   RecommendList
 } from '../style'
 
-class Recommend extends React.Component{
+class Recommend extends React.PureComponent{
   render(){
     const { recommend } = this.props
     return (

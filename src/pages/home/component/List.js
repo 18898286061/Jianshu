@@ -7,7 +7,7 @@ import {
 } from '../style'
 import { actionCreators } from '../store'
 
-class List extends React.Component{
+class List extends React.PureComponent{
   render(){
     const { homeList, getMoreList, homePage } = this.props
     return (

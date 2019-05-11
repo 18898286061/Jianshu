@@ -128,3 +128,14 @@ export const RecommendList = styled.div`
     margin-bottom :6px;
   }
 `
+
+export const BackTop = styled.div`
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  border: 1px solid #dcdcdc;
+  background-color: #fff;
+  font-size: 20px;
+  padding: 14px;
+`
+

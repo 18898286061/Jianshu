@@ -11,10 +11,16 @@ import { actionCreators } from './store'
 import {
   HomeWrapper,
   HomeLeft,
-  HomeRight
+  HomeRight,
+  BackTop
 } from './style'
 
-class Home extends React.Component{
+class Home extends React.PureComponent{
+
+  handleScrollTop() {
+    window.scrollTo(0, 0)
+  }
+
   render(){
     return (
       <HomeWrapper className="clearfix">
@@ -27,20 +33,46 @@ class Home extends React.Component{
           <Recommend />
           <Writer />
         </HomeRight>
+        { this.props.showScroll ? 
+        <BackTop onClick={this.handleScrollTop}>
+        <svg className="icon" aria-hidden="true">
+            <use xlinkHref="#icon-up" />
+        </svg>
+        </BackTop> : null}
       </HomeWrapper>
     )
   }
 
   componentDidMount() {
-    this.props.changeHomeData()
+    this.props.changeHomeData();
+    this.bindEvents();
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.props.changeScrollTopShow)
+  }
+
+  bindEvents() {
+    window.addEventListener('scroll', this.props.changeScrollTopShow)
   }
 }
 
+const mapStateToPropsp = (state) => ({
+  showScroll: state.getIn(['home', 'showScroll'])
+})
+
 const mapDispatchToProps = (dispatch) => ({
   changeHomeData() {
-    const action = actionCreators.getHomeData();
-    dispatch(action)
+    dispatch(actionCreators.getHomeData())
+  },
+
+  changeScrollTopShow() {
+    if (document.documentElement.scrollTop > 200) {
+      dispatch(actionCreators.toggleTopShow(true))
+    } else {
+      dispatch(actionCreators.toggleTopShow(false))
+    }
   }
 })
 
-export default connect(null, mapDispatchToProps)(Home);
+export default connect(mapStateToPropsp, mapDispatchToProps)(Home);
