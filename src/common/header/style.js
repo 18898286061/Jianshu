@@ -9,7 +9,7 @@ export const HeaderWrapper = styled.div`
   border-bottom: 1px solid #ccc;
 `
 
-export const Logo = styled.a`
+export const Logo = styled.div`
   display: block;
   width: 20vw;
   height:100%;

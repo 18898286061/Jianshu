@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { actionCreators } from './store'
 import { CSSTransition } from 'react-transition-group';
@@ -68,7 +69,9 @@ class Header extends React.Component {
       handleSearchBlur } = this.props
     return (
       <HeaderWrapper>
-        <Logo href="/" />
+        <Link to="/">
+          <Logo/>
+        </Link>
         <NavLeft>
           <SearchWrapper>
             <CSSTransition

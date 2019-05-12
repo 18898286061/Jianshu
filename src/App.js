@@ -11,15 +11,13 @@ class App extends React.Component{
   render(){
     return (
       <Provider store={store}>
-        <div>
-        <Header />
           <Router>
             <div>
+              <Header />
               <Route path="/" exact component={Home} />
               <Route path="/detail" component={Detail} />
             </div>
           </Router>
-        </div>
       </Provider>
     )
   }

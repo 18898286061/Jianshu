@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import {
   ListWrapper,
   ListItem,
@@ -15,13 +16,15 @@ class List extends React.PureComponent{
         {
           homeList.map((item, index)=> {
             return (
-              <ListItem key={index}>
-                <div>
-                  <h2>{item.get('title')}</h2>
-                  <p>{item.get('text')}</p>
-                </div>
-                <img className="itemImg" src={item.get('imgUrl')} alt="" />
-              </ListItem>
+              <Link key={index} to="/detail">
+                <ListItem>
+                  <div>
+                    <h2>{item.get('title')}</h2>
+                    <p>{item.get('text')}</p>
+                  </div>
+                  <img className="itemImg" src={item.get('imgUrl')} alt="" />
+                </ListItem>
+              </Link>
             )
           })
         }
